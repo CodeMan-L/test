@@ -1,0 +1,23 @@
+移动端事件和PC端事件存在很大的区别
+  + PC端是 鼠标 + 物理键盘 的触发
+  + 移动端是 手指 + 虚拟键盘 的触发
+@1 mousexxx这种事件在移动端几乎都不支持
+@2 keyxxx这种事件在移动端也几乎都不支持「我们基于input事件代替」
+   userNameInp.oninput=function(){
+      //监听文本框内容输入
+   };
+@3 PC端click事件是“点击”；但是移动端的click事件是“单击”{没一次点击后，会等待300ms，如果这期间没有触发第二次点击，才会认为是单击，也就是触发click事件 ->移动端的click事件存在300ms的延迟}；
+------
+移动端我们基本上都是基于 touch/gesture 事件模型处理相关操作的！
+  touch单手指事件模型
+    + touchstart 手指按下
+    + touchmove 手指移动
+    + touchend 手指离开
+    + touchcancel 手指操作取消「因为非正常原因取消」
+  gesture多手指事件模型
+    + gesturestart
+    + gesturechange
+    + gestureend
+    + gesturecancel
+-----
+需求：在移动端实现出类似于pc端click这样的“点击”操作效果「或者说解决移动端click的300ms延迟问题」！
